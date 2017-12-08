@@ -14,8 +14,11 @@
       </div> -->
         <div class="greeting">
             <div class="hello">
+                <transition name="fadeTitle">
+                    <app-title v-if="show == true" @onTitle="onTitle"></app-title>
+                </transition>
                 <h1>Вітаю тебе на моєму сайті</h1>
-                <p>Упс, здається всі <a href="#"><span class="active_focus">компоненти</span></a> розбіглися</p>
+                <p>Упс, здається деякі <a @click="titleShow"><span class="active_focus">компоненти</span></a> загубилися</p>
                 <p>Допоможеш мені їх знайти?</p>
                 <div class="block_submit">
                     <button class="active_focus" @click="$emit('onDeveloper')">Вперед</button> <br>
@@ -30,11 +33,16 @@
 export default {
     data() {
         return {
-            
+            show: false
         }
     },
     methods: {
-        
+        titleShow (){
+           return this.show = true;
+        },
+        onTitle(){
+           return this.show = false;
+        }
     },
     computed: {
 
@@ -47,9 +55,10 @@ export default {
 a{
     text-decoration: none;
     outline: none;
+    cursor: pointer;
 }
 .mainPage{
-    background: url('../assets/img/fon.png') no-repeat;
+    background: url('../assets/img/fon.png') ;
     background-size: cover;
     width: 100%;
     height: 100vmin;
@@ -74,6 +83,7 @@ a{
     align-items: center;
 }
 .greeting .hello{
+    position: absolute;
     padding: 40px 0;
     color: rgb(233, 30, 99);
     text-align: center;
@@ -103,7 +113,7 @@ a{
     font-size: 28px;
     color: rgb(233, 30, 99);
     cursor: pointer;
-    transition: .3s linear;
+    transition: all .3s ease-out;
 }
 .block_submit button:hover,
 .block_submit button:focus{
@@ -123,7 +133,13 @@ a{
     border-bottom: 2px solid #a8a9a3;
 }
 /* *** Transition *** */
-
+.fadeTitle-enter-active, .fadeTitle-leave-active {
+  transition: .3s
+}
+.fadeTitle-enter, .fadeTitle-leave-to  {
+  transform: scale(.6);
+  opacity: 0;
+}
 
 /* @@@ MEDIA @@@ */
 @media screen and (max-width: 768px){
@@ -139,4 +155,15 @@ a{
         display: none;
     }
 }
+/* @media screen and (max-height: 468px){
+    .greeting .hello h1{
+        font-size: 40px;
+    }
+    .block_submit button{
+        font-size: 18px;
+    }
+    .greeting .hello p {
+        font-size: 18px;
+    }
+} */
 </style>
