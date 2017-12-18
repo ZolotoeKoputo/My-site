@@ -1,7 +1,10 @@
 # My site
 
 > A Vue.js project
-
+```
+The project is being developed.
+The project is frozen.
+```
 ## Build Setup
 
 ``` bash
